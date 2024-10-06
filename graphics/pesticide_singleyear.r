@@ -19,7 +19,7 @@ data <- data %>%
            sep = "(?<=[A-Z])(?=[0-99])", remove = TRUE)
 
 data <- data %>%
-  filter(grepl("06", Year))
+  filter(grepl("18", Year))
 
 data <- data %>%
   mutate(Concentration = ifelse(Unit == "T", Concentration / 1000,
@@ -29,11 +29,10 @@ data <- data %>%
 ggplot(data, aes(x = State, y = Concentration, fill = Pesticide)) +
   geom_boxplot(outlier.shape = NA) +
   #geom_boxplot() +
-  labs(title = paste("Neonicotinoid Concentration by State | Year 20XX"),
+  labs(title = paste("Neonicotinoid Concentration by State | Year 2018"),
        x = "State",
        y = "Concentration (ppm)",
        fill = "Pesticide") +
-  ylim(0.5) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
