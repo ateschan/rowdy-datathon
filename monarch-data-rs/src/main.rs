@@ -37,28 +37,28 @@ fn read_csv(file_path: &str) -> Result<Vec<Data>, Box<dyn Error>> {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let file_path = "./MonarchsJourneyNorth.csv"; // Replace with your actual CSV file path
+    let file_path = "./MonarchsJourneyNorth.csv";
     let samples = read_csv(file_path)?;
 
     // For Year
     for year in 5..=22 {
-        let yearstr = format!("{:02}", year); // Ensures leading zero for single digits
+        let yearstr = format!("{:02}", year);
 
         let mut state_pool: Vec<StateEntry> = Vec::new();
 
         for sample in &samples {
-            if sample.year == yearstr { // No need to call to_string() here
+            if sample.year == yearstr { 
                 if let Some(a) = sample.sightings {
                     let entry = state_pool.iter_mut().find(|i| i.state == sample.state);
                     match entry {
                         Some(state_entry) => {
-                            state_entry.sightings += a; // Update existing entry
+                            state_entry.sightings += a;
                         }
                         None => {
                             state_pool.push(StateEntry {
                                 state: sample.state.clone(),
                                 sightings: a,
-                            }); // Add new entry
+                            });
                         }
                     }
                 }

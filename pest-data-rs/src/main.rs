@@ -77,27 +77,24 @@ fn read_csv(file_path: &str) -> Result<Vec<Data>, Box<dyn Error>> {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let file_path = "./USDA_PDP_AnalyticalResults.csv"; // Replace with your actual CSV file path
+    let file_path = "./USDA_PDP_AnalyticalResults.csv";
     let mut samples = read_csv(file_path)?;
     println!("Year,State,Avg");
     // For Year
     for year in 6..23 {
-        let mut yearstr;
-        if year > 9 {
-            yearstr = year.to_string();
-        } else {
-            yearstr = "0".to_owned() + &year.to_string();
-        }
+        let yearstr = format!("{:02}", year);
 
-        let mut StatePool: Vec<StateEntry> = Vec::new();
+        let mut state_pool: Vec<StateEntry> = Vec::new();
         for sample in samples.iter_mut() {
-            if sample.pesticide_name.clone().unwrap() == "Thiamethoxam" || sample.pesticide_name.clone().unwrap() == "Clothianidin" || sample.pesticide_name.clone().unwrap() =="Imidacloprid" {
+            if sample.pesticide_name.clone().unwrap() == "Thiamethoxam" ||
+            sample.pesticide_name.clone().unwrap() == "Clothianidin" || 
+            sample.pesticide_name.clone().unwrap() =="Imidacloprid" {
             if sample.sample_id.clone().unwrap()[2..4] == yearstr {
                 if sample.pp_.clone().unwrap() == "T" {
                     sample.concentration = Some(sample.concentration.unwrap() / 1000.0);
                 }
                 let mut f = false;
-                for i in StatePool.iter_mut() {
+                for i in state_pool.iter_mut() {
                     if sample.sample_id.clone().unwrap()[0..2] == i.state {
                         i.raw_conc += sample.concentration.unwrap();
                         i.samplect += 1.0;
@@ -105,7 +102,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                     }
                 }
                 if !f {
-                    StatePool.push(StateEntry {
+                    state_pool.push(StateEntry {
                         state: sample.sample_id.clone().unwrap()[0..2].to_owned(),
                         samplect: 1.0,
                         raw_conc: sample.concentration.unwrap(),
@@ -114,9 +111,9 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
             }
         }
-        for state in StatePool {
-            print!(
-                "{},{},{}\n",
+        for state in state_pool {
+            println!(
+                "{},{},{}",
                 year,
                 state.state,
                 state.raw_conc / state.samplect
