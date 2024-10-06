@@ -1,4 +1,4 @@
-year,state,sightings
+Year,State,Sightings
 97,TX,1
 97,CA,1
 97,TX,1
@@ -113397,7 +113397,7 @@ year,state,sightings
 23,MI,4
 23,KS,1
 23,MA,1
-23,FL,
+23,FL,1
 23,IN,1
 23,NY,1
 23,PA,1
@@ -116304,7 +116304,6 @@ year,state,sightings
 23,MO,1
 23,MO,1
 23,PA,2
-23,OK,2147483647
 23,PA,0
 23,PA,1
 23,WI,1
@@ -117561,7 +117560,7 @@ year,state,sightings
 23,NC,1
 23,NE,1
 23,ON,2
-23,ON,
+23,ON,1
 23,KS,2
 23,IN,6
 23,KS,3
@@ -122380,7 +122379,7 @@ year,state,sightings
 24,OK,2
 24,OK,2
 24,SC,1
-24,ON,
+24,ON,1
 24,IL,2
 24,NJ,24
 24,MI,1

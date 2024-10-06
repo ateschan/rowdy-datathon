@@ -41,7 +41,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let samples = read_csv(file_path)?;
 
     // For Year
-    for year in 6..=22 {
+    for year in 5..=22 {
         let yearstr = format!("{:02}", year); // Ensures leading zero for single digits
 
         let mut StatePool: Vec<StateEntry> = Vec::new();
