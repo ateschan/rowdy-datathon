@@ -1,7 +1,6 @@
 use csv::ReaderBuilder;
 use std::fs::File;
 use std::{error::Error, io, process};
-
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
